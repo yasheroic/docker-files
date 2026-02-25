@@ -1,13 +1,12 @@
-
 # 🐳 Docker Apps Collection
 
 A collection of simple applications dockerized using different languages and frameworks.
 
-This repository is created for learning, experimentation, and understanding how Docker works across different stacks.
+This repository is created for learning, experimentation, and deeply understanding how Docker works across different stacks.
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```
 docker-apps/
@@ -18,7 +17,13 @@ docker-apps/
 │   ├── package.json
 │   └── .dockerignore
 │
-├── (more apps coming soon...)
+├── python-app/
+│   ├── app.py
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   ├── .dockerignore
+│   ├── templates/
+│   └── static/
 │
 └── README.md
 ```
@@ -36,31 +41,18 @@ A simple Express-based Node.js application running inside Docker.
 * Express server
 * Simple UI page
 * Dockerized using lightweight Node Alpine image
-* Production-ready Dockerfile structure
+* Optimized Docker layer caching
+* Production-style Dockerfile structure
 
----
-
-## 🛠 How to Run (Node App)
-
-### Step 1 — Navigate to App
+### 🛠 How to Run
 
 ```bash
 cd node-app
-```
-
-### Step 2 — Build Docker Image
-
-```bash
 docker build -t node-docker-app .
-```
-
-### Step 3 — Run Container
-
-```bash
 docker run -p 3000:3000 node-docker-app
 ```
 
-Open in browser:
+Open:
 
 ```
 http://localhost:3000
@@ -68,47 +60,82 @@ http://localhost:3000
 
 ---
 
-## 🧠 Concepts Practiced
+## 2️⃣ Python (Flask) App
 
-* Dockerfile basics
-* Layer caching
-* `.dockerignore`
-* Production dependency install
-* Port mapping
-* Lightweight base images
-* Container lifecycle
+A clean, modern Flask application with proper project structure and static file handling.
+
+### 🔹 Features
+
+* Flask-based web server
+* Template rendering
+* Static file support (CSS)
+* Clean project structure
+* Lightweight Python Alpine base image
+* Docker layer caching optimization
+
+### 🛠 How to Run
+
+```bash
+cd python-app
+docker build -t python-docker-app .
+docker run -p 5000:5000 python-docker-app
+```
+
+Open:
+
+```
+http://localhost:5000
+```
 
 ---
 
-## 📦 Future Additions
+# 🧠 Concepts Practiced
+
+This repository demonstrates:
+
+* Dockerfile fundamentals
+* Layer caching optimization
+* `.dockerignore` usage
+* Production dependency installation
+* Port mapping
+* Lightweight base images
+* Static file handling inside containers
+* Template rendering in containers
+* Container lifecycle management
+
+---
+
+# 📦 Future Additions
 
 This repository will expand with Docker examples for:
 
-* Python (Flask / FastAPI)
+* FastAPI
 * Java (Spring Boot)
 * Go
 * PHP
 * Multi-stage builds
 * Docker Compose setups
 * Production optimizations
+* Non-root containers
 * Security best practices
+* Health checks
+* CI/CD integration
 
 ---
 
-## 🎯 Goal of This Repository
+# 🎯 Goal of This Repository
 
 The purpose of this project is to:
 
 * Understand Docker fundamentals deeply
 * Practice containerizing different stacks
 * Learn production-ready Docker patterns
-* Build a strong DevOps foundation
+* Build strong DevOps and infrastructure foundations
+* Compare how Docker behaves across ecosystems
 
 ---
 
-## 🏗 Requirements
+# 🏗 Requirements
 
 * Docker installed
-* Basic understanding of CLI
-
----
+* Basic CLI knowledge
