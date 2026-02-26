@@ -7,9 +7,9 @@ COPY pom.xml .
 
 RUN mvn dependency:go-offline
 
-COPY src .
+COPY src ./src
 
-RUN mvn clean package -DskipTest
+RUN mvn clean package -DskipTests
 
 #Stage-2: Run Stage
 
@@ -21,7 +21,7 @@ COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT [ "java","jar","app.jar" ]
+ENTRYPOINT [ "java","-jar","app.jar" ]
 
 
 
