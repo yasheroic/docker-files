@@ -1,0 +1,54 @@
+services:
+  node-app:
+    container_name: three-tier-node-app
+    build: .
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    ports:
+      - 3000:3000
+    networks:
+      - my-internal-net
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: test@123
+      MYSQL_DATABASE: mydb
+      MYSQL_HOST: mysql-db
+      REDIS_HOST: redis-cache
+
+  mysql-db:
+    image: mysql:8
+    container_name: mysql-database
+    environment:
+      MYSQL_ROOT_PASSWORD: root@123
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: test@123
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: on-failure
+    networks:
+      - my-internal-net
+    volumes:
+      - mysql-data:/var/lib/mysql
+    
+  
+  redis-cache:
+    image: redis:8.4.2-trixie
+    container_name: myredis-cache
+    networks:
+      - my-internal-net
+    volumes:
+      - redis-data:/data
+
+networks:
+  my-internal-net:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  redis-data:
