@@ -1,8 +1,8 @@
 # 🐳 Docker Apps Collection
 
-A collection of simple applications dockerized using different languages and frameworks.
+A curated collection of multi-language applications containerized using Docker.
 
-This repository is created for learning, experimentation, and deeply understanding how Docker works across different stacks.
+This repository is built for **deep learning, experimentation, and understanding Docker across different technology stacks**. It focuses not just on “running containers” but on writing clean, optimized, production-style Dockerfiles.
 
 ---
 
@@ -15,6 +15,7 @@ docker-apps/
 │   ├── Dockerfile
 │   ├── server.js
 │   ├── package.json
+│   ├── package-lock.json
 │   └── .dockerignore
 │
 ├── python-app/
@@ -25,6 +26,12 @@ docker-apps/
 │   ├── templates/
 │   └── static/
 │
+├── java-springboot-app/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   ├── mvnw
+│   └── src/
+│
 └── README.md
 ```
 
@@ -32,19 +39,19 @@ docker-apps/
 
 # 🚀 Available Applications
 
-## 1️⃣ Node.js App
+## 1️⃣ Node.js (Express) App
 
-A simple Express-based Node.js application running inside Docker.
+A lightweight Express-based Node.js application running inside Docker.
 
-### 🔹 Features
+### 🔹 Highlights
 
 * Express server
 * Simple UI page
-* Dockerized using lightweight Node Alpine image
+* Lightweight `node:alpine` base image
 * Optimized Docker layer caching
-* Production-style Dockerfile structure
+* Production-style dependency handling
 
-### 🛠 How to Run
+### 🛠 Run Locally
 
 ```bash
 cd node-app
@@ -52,7 +59,7 @@ docker build -t node-docker-app .
 docker run -p 3000:3000 node-docker-app
 ```
 
-Open:
+Access:
 
 ```
 http://localhost:3000
@@ -62,18 +69,17 @@ http://localhost:3000
 
 ## 2️⃣ Python (Flask) App
 
-A clean, modern Flask application with proper project structure and static file handling.
+A structured Flask web application demonstrating containerized template rendering and static asset handling.
 
-### 🔹 Features
+### 🔹 Highlights
 
-* Flask-based web server
-* Template rendering
-* Static file support (CSS)
-* Clean project structure
-* Lightweight Python Alpine base image
-* Docker layer caching optimization
+* Flask web server
+* Template rendering (Jinja2)
+* Static file handling
+* Lightweight `python:alpine` base image
+* Clean Docker layering strategy
 
-### 🛠 How to Run
+### 🛠 Run Locally
 
 ```bash
 cd python-app
@@ -81,7 +87,7 @@ docker build -t python-docker-app .
 docker run -p 5000:5000 python-docker-app
 ```
 
-Open:
+Access:
 
 ```
 http://localhost:5000
@@ -89,53 +95,87 @@ http://localhost:5000
 
 ---
 
-# 🧠 Concepts Practiced
+## 3️⃣ Java (Spring Boot) App
+
+A containerized Spring Boot application demonstrating Java application packaging and Docker integration.
+
+### 🔹 Highlights
+
+* Maven wrapper support
+* Spring Boot application structure
+* Layered Docker build
+* JVM-based container deployment
+* Production-style packaging approach
+
+### 🛠 Run Locally
+
+```bash
+cd java-springboot-app
+docker build -t springboot-docker-app .
+docker run -p 8080:8080 springboot-docker-app
+```
+
+Access:
+
+```
+http://localhost:8080
+```
+
+---
+
+# 🧠 Docker Concepts Practiced
 
 This repository demonstrates:
 
 * Dockerfile fundamentals
 * Layer caching optimization
+* Efficient dependency installation
 * `.dockerignore` usage
-* Production dependency installation
 * Port mapping
 * Lightweight base images
-* Static file handling inside containers
+* Static file management inside containers
 * Template rendering in containers
 * Container lifecycle management
+* Multi-language containerization patterns
 
 ---
 
 # 📦 Future Additions
 
-This repository will expand with Docker examples for:
+Planned expansions:
 
 * FastAPI
-* Java (Spring Boot)
-* Go
-* PHP
+* Go applications
+* PHP apps
 * Multi-stage builds
 * Docker Compose setups
-* Production optimizations
-* Non-root containers
-* Security best practices
+* Non-root container examples
 * Health checks
 * CI/CD integration
+* Production-grade optimizations
+* Container security hardening
 
 ---
 
-# 🎯 Goal of This Repository
+# 🎯 Purpose of This Repository
 
-The purpose of this project is to:
+This project aims to:
 
-* Understand Docker fundamentals deeply
-* Practice containerizing different stacks
-* Learn production-ready Docker patterns
-* Build strong DevOps and infrastructure foundations
-* Compare how Docker behaves across ecosystems
+* Build strong Docker fundamentals
+* Compare containerization patterns across ecosystems
+* Understand image optimization strategies
+* Practice production-style Docker builds
+* Strengthen DevOps & infrastructure engineering skills
 
 ---
 
 # 🏗 Requirements
 
 * Docker installed
-* Basic CLI knowledge
+* Basic CLI familiarity
+
+---
+
+# 🙏 Acknowledgment
+
+Special thanks to **Shubham Londhe (Train With Shubham)** for teaching the foundational Docker and DevOps concepts that inspired this repository.
