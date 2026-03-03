@@ -1,0 +1,51 @@
+services:
+  node-app:
+    build: .
+    restart: always
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: testdb
+      POSTGRES_HOST: postgres-db
+      REDIS_HOST: redis-cache
+    networks:
+      - my-internal-net
+
+  postgres-db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: testdb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - my-internal-net
+
+  redis-cache:
+    image: redis:7
+    restart: always
+    volumes:
+      - redis-data:/data
+    networks:
+      - my-internal-net
+
+networks:
+  my-internal-net:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:

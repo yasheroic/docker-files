@@ -2,7 +2,7 @@
 
 A curated collection of multi-language applications containerized using Docker.
 
-This repository is built for **deep learning, experimentation, and understanding Docker across different technology stacks**. It focuses not just on “running containers” but on writing clean, optimized, production-style Dockerfiles.
+This repository is built for **deep learning, experimentation, and understanding Docker across different technology stacks**. It focuses not just on “running containers” but on writing clean, optimized, production-style Dockerfiles — including **multi-stage builds**.
 
 ---
 
@@ -12,25 +12,16 @@ This repository is built for **deep learning, experimentation, and understanding
 docker-apps/
 │
 ├── node-app/
-│   ├── Dockerfile
-│   ├── server.js
-│   ├── package.json
-│   ├── package-lock.json
-│   └── .dockerignore
 │
 ├── python-app/
-│   ├── app.py
-│   ├── requirements.txt
-│   ├── Dockerfile
-│   ├── .dockerignore
-│   ├── templates/
-│   └── static/
 │
 ├── java-springboot-app/
-│   ├── Dockerfile
-│   ├── pom.xml
-│   ├── mvnw
-│   └── src/
+│
+├── go-app/
+│   ├── Dockerfile              # Normal Docker build
+│   ├── Dockerfile.multistage   # Multi-stage optimized build
+│   ├── go.mod
+│   └── main.go
 │
 └── README.md
 ```
@@ -46,12 +37,11 @@ A lightweight Express-based Node.js application running inside Docker.
 ### 🔹 Highlights
 
 * Express server
-* Simple UI page
 * Lightweight `node:alpine` base image
 * Optimized Docker layer caching
 * Production-style dependency handling
 
-### 🛠 Run Locally
+### 🛠 Run
 
 ```bash
 cd node-app
@@ -59,27 +49,20 @@ docker build -t node-docker-app .
 docker run -p 3000:3000 node-docker-app
 ```
 
-Access:
-
-```
-http://localhost:3000
-```
-
 ---
 
 ## 2️⃣ Python (Flask) App
 
-A structured Flask web application demonstrating containerized template rendering and static asset handling.
+A structured Flask web application demonstrating template rendering and static asset handling inside containers.
 
 ### 🔹 Highlights
 
 * Flask web server
-* Template rendering (Jinja2)
-* Static file handling
-* Lightweight `python:alpine` base image
-* Clean Docker layering strategy
+* Static + template handling
+* Lightweight `python:alpine` image
+* Clean Docker layering
 
-### 🛠 Run Locally
+### 🛠 Run
 
 ```bash
 cd python-app
@@ -87,27 +70,20 @@ docker build -t python-docker-app .
 docker run -p 5000:5000 python-docker-app
 ```
 
-Access:
-
-```
-http://localhost:5000
-```
-
 ---
 
 ## 3️⃣ Java (Spring Boot) App
 
-A containerized Spring Boot application demonstrating Java application packaging and Docker integration.
+A containerized Spring Boot application demonstrating Java packaging and Docker integration.
 
 ### 🔹 Highlights
 
 * Maven wrapper support
-* Spring Boot application structure
 * Layered Docker build
 * JVM-based container deployment
-* Production-style packaging approach
+* Production-style packaging
 
-### 🛠 Run Locally
+### 🛠 Run
 
 ```bash
 cd java-springboot-app
@@ -115,10 +91,38 @@ docker build -t springboot-docker-app .
 docker run -p 8080:8080 springboot-docker-app
 ```
 
-Access:
+---
 
+## 4️⃣ Go App (Normal & Multi-Stage Build)
+
+A minimal Go web server demonstrating both a **standard Docker build** and an **optimized multi-stage build**.
+
+### 🔹 Highlights
+
+* Lightweight Go HTTP server
+* Standard Dockerfile
+* Multi-stage build for smaller image size
+* Distroless / minimal runtime optimization
+* Binary compilation inside container
+
+---
+
+### 🛠 Normal Docker Build
+
+```bash
+cd go-app
+docker build -t go-docker-app .
+docker run -p 8081:8081 go-docker-app
 ```
-http://localhost:8080
+
+---
+
+### 🛠 Multi-Stage Optimized Build
+
+```bash
+cd go-app
+docker build -f Dockerfile.multistage -t go-docker-app-ms .
+docker run -p 8081:8081 go-docker-app-ms
 ```
 
 ---
@@ -129,14 +133,16 @@ This repository demonstrates:
 
 * Dockerfile fundamentals
 * Layer caching optimization
+* Multi-stage builds
 * Efficient dependency installation
 * `.dockerignore` usage
 * Port mapping
 * Lightweight base images
-* Static file management inside containers
-* Template rendering in containers
+* Static file management
+* Template rendering
+* JVM vs compiled binary containerization
+* Image size optimization strategies
 * Container lifecycle management
-* Multi-language containerization patterns
 
 ---
 
@@ -145,11 +151,10 @@ This repository demonstrates:
 Planned expansions:
 
 * FastAPI
-* Go applications
+* Advanced Go examples
 * PHP apps
-* Multi-stage builds
 * Docker Compose setups
-* Non-root container examples
+* Non-root containers
 * Health checks
 * CI/CD integration
 * Production-grade optimizations
@@ -163,8 +168,8 @@ This project aims to:
 
 * Build strong Docker fundamentals
 * Compare containerization patterns across ecosystems
-* Understand image optimization strategies
-* Practice production-style Docker builds
+* Understand image optimization deeply
+* Practice production-ready Docker patterns
 * Strengthen DevOps & infrastructure engineering skills
 
 ---
@@ -179,3 +184,5 @@ This project aims to:
 # 🙏 Acknowledgment
 
 Special thanks to **Shubham Londhe (Train With Shubham)** for teaching the foundational Docker and DevOps concepts that inspired this repository.
+
+---
